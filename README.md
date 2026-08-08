@@ -23,11 +23,11 @@ services:
       - JELLYFIN_API_KEY=
     # ── DEFAULT SETTINGS ────────────────────────────────
     command:
-      - "--length=15"
-      - "--start-buffer=600"
-      - "--end-ignore=0.8"
-      - "--max-height=720"
-      # - "--force"      # uncomment to re-generate all clips
+      - "--length=15"               # seconds for each clip
+      - "--start-buffer=600"        # skip first N seconds (credits, logos)
+      - "--end-ignore=0.8"          # ignore last 80% of the movie (0.0–1.0)
+      - "--max-height=720"          # scale taller videos down to this height
+      # - "--force"                  # uncomment to rebuild clips that already exist
 ```
 
 Then run:
