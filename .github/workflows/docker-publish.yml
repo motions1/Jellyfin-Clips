@@ -3,18 +3,12 @@ name: Build and push Docker image
 on:
   push:
     branches: [main]
-    paths:
-      - "theme_clips.py"
-      - "Dockerfile"
   release:
     types: [published]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - uses: actions/checkout@v4
@@ -23,8 +17,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          username: motions1
+          password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Build and push
         uses: docker/build-push-action@v6
