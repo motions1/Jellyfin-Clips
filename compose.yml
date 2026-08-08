@@ -4,24 +4,21 @@ services:
     container_name: jellyfin-clips
     build: .
     volumes:
-      # ── REQUIRED ──────────────────────────────────────
       # Mount your movie directory (change the path before the colon)
       - /path/to/your/movies:/movies
 
     environment:
-      # ── OPTIONAL ──────────────────────────────────────
       # Set these to auto-refresh Jellyfin after clip generation.
       # API key: Jellyfin Dashboard > API Keys > +
       - JELLYFIN_URL=
       - JELLYFIN_API_KEY=
 
-    # ── DEFAULT SETTINGS ────────────────────────────────
     # Change these to your liking:
     command:
       - "--length=15"               # seconds for each clip
       - "--start-buffer=600"        # skip first N seconds (credits, logos)
       - "--end-ignore=0.8"          # ignore last 80% of the movie (0.0–1.0)
-      - "--max-height=720"          # scale taller videos down to this height
+      - "--max-height=720"          # scale taller videos down to this height (720, 1080)
       # - "--force"                  # uncomment to rebuild clips that already exist
 
     # Schedule with cron: add this to your crontab

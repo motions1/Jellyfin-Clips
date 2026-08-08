@@ -15,18 +15,15 @@ services:
   theme-clips:
     image: ghcr.io/motions1/jellyfin-clips
     volumes:
-      # ── REQUIRED ──────────────────────────────────────
       - /path/to/your/movies:/movies
     environment:
-      # ── OPTIONAL ──────────────────────────────────────
       - JELLYFIN_URL=
       - JELLYFIN_API_KEY=
-    # ── DEFAULT SETTINGS ────────────────────────────────
     command:
       - "--length=15"               # seconds for each clip
       - "--start-buffer=600"        # skip first N seconds (credits, logos)
       - "--end-ignore=0.8"          # ignore last 80% of the movie (0.0–1.0)
-      - "--max-height=720"          # scale taller videos down to this height
+      - "--max-height=720"          # scale taller videos down to this height (720, 1080)
       # - "--force"                  # uncomment to rebuild clips that already exist
 ```
 
