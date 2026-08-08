@@ -14,12 +14,20 @@ Create a `compose.yml` (included in the repo) or paste:
 services:
   theme-clips:
     image: ghcr.io/motions1/jellyfin-clips
-    build: .
     volumes:
+      # ── REQUIRED ──────────────────────────────────────
       - /path/to/your/movies:/movies
     environment:
+      # ── OPTIONAL ──────────────────────────────────────
       - JELLYFIN_URL=
       - JELLYFIN_API_KEY=
+    # ── DEFAULT SETTINGS ────────────────────────────────
+    command:
+      - "--length=15"
+      - "--start-buffer=600"
+      - "--end-ignore=0.8"
+      - "--max-height=720"
+      # - "--force"      # uncomment to re-generate all clips
 ```
 
 Then run:
@@ -29,8 +37,6 @@ docker compose run --rm theme-clips
 ```
 
 ### Schedule with cron + compose
-
-Add to your crontab for nightly runs:
 
 ```cron
 0 3 * * * cd /path/to/Jellyfin-Clips && docker compose run --rm theme-clips >> clips.log 2>&1

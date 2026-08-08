@@ -4,13 +4,30 @@ services:
     container_name: jellyfin-clips
     build: .
     volumes:
-      # Mount your movie directory — change the path before the colon
+      # ── REQUIRED ──────────────────────────────────────
+      # Mount your movie directory (change the path before the colon)
       - /path/to/your/movies:/movies
+
     environment:
-      # Optional: set these to auto-refresh Jellyfin after clip generation
-      # Generate an API key at: Jellyfin Dashboard > API Keys > +
+      # ── OPTIONAL ──────────────────────────────────────
+      # Set these to auto-refresh Jellyfin after clip generation.
+      # API key: Jellyfin Dashboard > API Keys > +
       - JELLYFIN_URL=
       - JELLYFIN_API_KEY=
-    # Run once.  To schedule nightly, add this to your crontab:
+
+    # ── DEFAULT SETTINGS ────────────────────────────────
+    # Change these to your preference:
+    #   --length          clip duration in seconds
+    #   --start-buffer    seconds to skip at the beginning
+    #   --end-ignore      fraction of the movie to ignore at the end (0.0–1.0)
+    #   --max-height      scale taller videos down to this height
+    #   --force           re-generate clips even if Backdrops folder exists
+    command:
+      - "--length=15"
+      - "--start-buffer=600"
+      - "--end-ignore=0.8"
+      - "--max-height=720"
+      # - "--force"      # uncomment this line to force re-generation
+
+    # Schedule with cron: add this to your crontab
     #   0 3 * * * cd /path/to/Jellyfin-Clips && docker compose run --rm theme-clips
-    command: ["--force"]
