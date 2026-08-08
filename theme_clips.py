@@ -15,13 +15,13 @@ import urllib.request
 
 # ── config (edit or use CLI args) ─────────────────────────
 
-MOVIES_ROOT = "/movies"
-JELLYFIN_URL = os.environ.get("JELLYFIN_URL", "")
-JELLYFIN_API_KEY = os.environ.get("JELLYFIN_API_KEY", "")
-CLIP_LENGTH = 10
-START_BUFFER = 180
-END_IGNORE_PCT = 0.5
-MAX_HEIGHT = 720
+MOVIES_ROOT = "/movies" # Path of your main movie folder
+JELLYFIN_URL = os.environ.get("JELLYFIN_URL", "")          # Read from env var (Docker/compose) — leave empty to skip refresh
+JELLYFIN_API_KEY = os.environ.get("JELLYFIN_API_KEY", "")    # Generate at: Jellyfin Dashboard > API Keys > +
+CLIP_LENGTH = 10      # Length of clip
+START_BUFFER = 180    # Seconds at the beginning of movie to skip (intro, trailers, etc.)
+END_IGNORE_PCT = 0.5  # Exclude this percentage at the end of the movie when creating clip
+MAX_HEIGHT = 720      # Video size (720, 1080)
 
 # ── helpers ──────────────────────────────────────────────
 
