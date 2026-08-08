@@ -3,8 +3,6 @@
 Generates 10-second theme video clips for every movie in your library.
 Jellyfin automatically serves these as backdrop previews.
 
-No Python packages required — just `ffmpeg`.
-
 
 ## Docker Compose
 
