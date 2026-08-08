@@ -41,7 +41,11 @@ Add one of these to your crontab (`crontab -e`):
 
 ### Optional — Jellyfin auto-refresh
 
-Pass your Jellyfin URL and API key as environment variables:
+After generating clips, the script can tell Jellyfin to scan for the new
+`Backdrops/` folders so they show up immediately instead of waiting for
+the next scheduled library scan.
+
+**Docker** — pass as environment variables:
 
 ```bash
 docker run --rm \
@@ -49,6 +53,28 @@ docker run --rm \
   -e JELLYFIN_URL=http://192.168.1.100:8096 \
   -e JELLYFIN_API_KEY=your-api-key \
   ghcr.io/motions1/jellyfin-clips
+```
+
+Or in `compose.yml`:
+
+```yaml
+environment:
+  - JELLYFIN_URL=http://192.168.1.100:8096
+  - JELLYFIN_API_KEY=your-api-key
+```
+
+**Direct** — set the variables before running, or hardcode them in the script:
+
+```bash
+# Set them per-run
+JELLYFIN_URL=http://192.168.1.100:8096 JELLYFIN_API_KEY=your-api-key python3 theme_clips.py /path/to/movies
+```
+
+Or edit `theme_clips.py` directly (lines near the top):
+
+```python
+JELLYFIN_URL = "http://192.168.1.100:8096"
+JELLYFIN_API_KEY = "your-api-key"
 ```
 
 Generate an API key at: Jellyfin Dashboard > API Keys > +
