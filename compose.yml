@@ -1,0 +1,16 @@
+services:
+  theme-clips:
+    image: ghcr.io/motions1/jellyfin-clips
+    container_name: jellyfin-clips
+    build: .
+    volumes:
+      # Mount your movie directory — change the path before the colon
+      - /path/to/your/movies:/movies
+    environment:
+      # Optional: set these to auto-refresh Jellyfin after clip generation
+      # Generate an API key at: Jellyfin Dashboard > API Keys > +
+      - JELLYFIN_URL=
+      - JELLYFIN_API_KEY=
+    # Run once.  To schedule nightly, add this to your crontab:
+    #   0 3 * * * cd /path/to/Jellyfin-Clips && docker compose run --rm theme-clips
+    command: ["--force"]
